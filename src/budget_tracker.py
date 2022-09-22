@@ -1,4 +1,5 @@
 # pylint: disable=missing-docstring
+# pylint: disable=invalid-name
 
 import pandas as pd
 # import numpy as np
