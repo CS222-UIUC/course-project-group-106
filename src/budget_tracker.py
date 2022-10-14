@@ -22,5 +22,17 @@ def calc_account_balance():
             account_balance -= row['Amount']
     return account_balance
 
+def unique_categories():
+    return df['Category'].unique()
+
+def tally_categories():
+    tally = {}
+    for index, row in df.iterrows():
+        if row['Category'] in tally:
+            tally[row['Category']] += row['Amount']
+        else:
+            tally[row['Category']] = row['Amount']
+    return tally
+
 # print out the account balance
 print(calc_account_balance())
