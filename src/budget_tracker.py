@@ -4,7 +4,10 @@
 # pylint: disable=unused-variable
 
 
+
 import pandas as pd
+from matplotlib import pyplot as plt
+
 from matplotlib import pyplot as plt
 
 # import numpy as np
@@ -62,8 +65,6 @@ def plot_histogram():
 
 # print out the account balance
 print(calc_account_balance())
-
-plot_histogram()
 
 def calc_food_spending():
     tally = tally_categories()
