@@ -189,3 +189,34 @@ def plot_pie_chart(category_to_spent):
     plt.show()
 
 plot_pie_chart(category_to_spent)
+
+# define function that plots line chart of spending over time, input is df (transactions data), group by month.
+def plot_line_chart(df, year):
+    month_to_spending = {'1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0, '8': 0, '9': 0, '10': 0, '11': 0, '12': 0}
+    for index, row in df.iterrows():
+        cur_year = row['Date'].split('/')[2]
+        cur_month = row['Date'].split('/')[0]
+        print(cur_year, year)
+        if cur_year == year:
+            if row['Transaction Type'] == 'credit':
+                month_to_spending[cur_month] = month_to_spending[cur_month] + row['Amount']
+                print('went here')
+            else:
+                month_to_spending[cur_month] = month_to_spending[cur_month] - row['Amount']
+
+    xaxis = list()
+    yaxis = list()
+    print(month_to_spending)
+    for key, value in month_to_spending.items():
+        xaxis.append(key)
+        yaxis.append(value)
+        
+    # draw line chart with xaxis and yaxis
+    plt.plot(xaxis, yaxis)
+    plt.xlabel('Month')
+    plt.ylabel('Spending')
+    plt.title('Spending Over Time')
+    plt.savefig("Spending Over Time.png")
+    plt.show()
+
+plot_line_chart(df, '2022')
