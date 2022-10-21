@@ -11,7 +11,7 @@ from matplotlib import pyplot as plt
 # import numpy as np
 
 # Read in the data
-df = pd.read_csv('../data/transactions.csv')
+df = pd.read_csv('data/transactions.csv')
 
 # print out the data
 # print(df)
