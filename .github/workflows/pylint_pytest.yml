@@ -22,6 +22,7 @@ jobs:
         pip install pandas
         pip install pytest
         pip install matplotlib
+        pip install pathlib
     - name: Analysing the code with pylint
       run: |
         pylint $(git ls-files '*.py')
