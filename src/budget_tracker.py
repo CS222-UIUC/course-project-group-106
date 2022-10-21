@@ -8,15 +8,13 @@
 import pandas as pd
 from matplotlib import pyplot as plt
 
-from matplotlib import pyplot as plt
-
 # import numpy as np
 
 # Read in the data
-df = pd.read_csv('data/transactions.csv')
+df = pd.read_csv('../data/transactions.csv')
 
 # print out the data
-print(df)
+# print(df)
 
 # add the 'Amount' column to amount_sum if the "Transaction Type" is "credit"
 def calc_account_balance():
@@ -31,6 +29,7 @@ def calc_account_balance():
 def unique_categories():
     return df['Category'].unique()
 
+# Returns Dictionary of categories and their total spending
 def tally_categories():
     tally = {}
     for index, row in df.iterrows():
@@ -62,9 +61,6 @@ def plot_histogram():
     plt.ylabel("Amount spent")
     plt.title("Amount spent on each category")
     plt.savefig("Amount Spent.png")
-
-# print out the account balance
-print(calc_account_balance())
 
 def calc_food_spending():
     tally = tally_categories()
@@ -162,4 +158,34 @@ def calc_misc_spending():
 
 # entertainment, school, shopping, miscellaneous
 
-tally_categories()
+# print out the account balance
+print(calc_account_balance())
+
+print(tally_categories())
+category_to_spent = tally_categories()
+
+to_delete = []
+for key, value in category_to_spent.items():
+    if (value >= 0):
+        to_delete.append(key)
+    else:
+        category_to_spent[key] = category_to_spent[key] * -1
+
+for key in to_delete:
+    del category_to_spent[key]
+
+# define function that plots pie chart of spending, input is a dictionary
+def plot_pie_chart(category_to_spent):
+    sizes = list()
+    labels = list()
+    for key, value in category_to_spent.items():
+        sizes.append(value)
+        labels.append(key)
+    fig1, ax1 = plt.subplots()
+    ax1.pie(sizes, labels=labels, rotatelabels=45, shadow=True, startangle=90)
+    ax1.axis('equal')
+    plt.legend(title="Spend Categories")
+    plt.savefig("Spending Pie Chart.png")
+    plt.show()
+
+plot_pie_chart(category_to_spent)
