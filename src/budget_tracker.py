@@ -7,6 +7,7 @@
 
 import pandas as pd
 from matplotlib import pyplot as plt
+import numpy as np
 
 # import numpy as np
 
@@ -219,4 +220,55 @@ def plot_line_chart(df, year):
     plt.savefig("Spending Over Time.png")
     plt.show()
 
-plot_line_chart(df, '2022')
+# plot_line_chart(df, '2022')
+
+def tally_user_input(tally_dictionary):
+    dictionary = {}
+    for key, value in tally_dictionary.items():
+        dictionary[key] = 0
+        
+
+    print(dictionary.keys())
+    while True:
+        user_input_category = input("Enter 'quit' to stop choosing categories to submit values for or enter category name to set budget: \n")
+        if (user_input_category == "quit"):
+            break   
+        else:
+            if (user_input_category) not in dictionary:
+                print("Category was not valid")
+                continue
+            
+            user_input_num = int(input("Enter amount to budget: \n"))
+            dictionary[user_input_category] = user_input_num
+
+    return dictionary
+
+# print(tally_user_input(tally_categories()))
+
+def budget_left(user_spending, user_budget):
+
+    X_axis = np.arange(len(list(user_spending.keys())))
+    spending_value = list(user_spending.values())
+    # actual_spending = spending_value*-1
+    budget_value = list(user_budget.values())
+    # budget = []
+    # for i in budget_value:
+    #     if i > 0:
+    #         budget.append(i)
+    
+    
+
+  
+    plt.bar(X_axis - 0.2, spending_value, 0.4, label = 'Spending')
+    plt.bar(X_axis + 0.2, budget_value, 0.4, label = 'Budget')
+    
+    plt.xticks(X_axis, list(user_spending.keys()))
+    plt.xlabel("Category")
+    plt.ylabel("Number of Students")
+    plt.title("Number of Students in each group")
+    plt.legend()
+    plt.show()
+
+
+
+budget_left(tally_categories(), tally_user_input(tally_categories()))
