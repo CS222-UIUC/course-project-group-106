@@ -189,7 +189,7 @@ def plot_pie_chart(category_to_spent):
     plt.savefig("Spending Pie Chart.png")
     plt.show()
 
-plot_pie_chart(category_to_spent)
+#plot_pie_chart(category_to_spent)
 
 # define function that plots line chart of spending over time, input is df (transactions data), group by month.
 def plot_line_chart(df, year):
@@ -228,7 +228,7 @@ def tally_user_input(tally_dictionary):
         dictionary[key] = 0
         
 
-    print(dictionary.keys())
+    # print(dictionary.keys())
     while True:
         user_input_category = input("Enter 'quit' to stop choosing categories to submit values for or enter category name to set budget: \n")
         if (user_input_category == "quit"):
@@ -247,25 +247,34 @@ def tally_user_input(tally_dictionary):
 
 def budget_left(user_spending, user_budget):
 
-    X_axis = np.arange(len(list(user_spending.keys())))
+    
+    keys = list(user_spending.keys())
+
     spending_value = list(user_spending.values())
-    # actual_spending = spending_value*-1
+    for i in np.arange(len(spending_value)):
+        spending_value[i] *= -1
+    
     budget_value = list(user_budget.values())
-    # budget = []
-    # for i in budget_value:
-    #     if i > 0:
-    #         budget.append(i)
-    
-    
+    actual_budget_value = []
+    actual_spending_value = []  
+    actual_keys = []   
+    for key in keys:
+        if user_budget[key] > 0:
+            actual_budget_value.append(user_budget[key])
+            actual_spending_value.append(user_spending[key])
+            actual_keys.append(key)
+
+            
+    X_axis = np.arange(len(actual_keys))
 
   
-    plt.bar(X_axis - 0.2, spending_value, 0.4, label = 'Spending')
-    plt.bar(X_axis + 0.2, budget_value, 0.4, label = 'Budget')
+    plt.bar(X_axis - 0.2, actual_spending_value, 0.4, label = 'Spending')
+    plt.bar(X_axis + 0.2, actual_budget_value, 0.4, label = 'Budget')
     
-    plt.xticks(X_axis, list(user_spending.keys()))
+    plt.xticks(X_axis, actual_keys)
     plt.xlabel("Category")
-    plt.ylabel("Number of Students")
-    plt.title("Number of Students in each group")
+    plt.ylabel("Amount in Dollars")
+    plt.title("Budget and Spending Side-By-Side")
     plt.legend()
     plt.show()
 
