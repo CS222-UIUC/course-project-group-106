@@ -1,31 +1,39 @@
 import './App.css';
 import React from 'react';
-// import FileReader from './Components/FileReader';
-// import Nav from './Components/Nav';
 import './App.css';
 import { useState } from 'react';
-// import file from '../../data/transactions.csv';
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+
+import {Home} from './Components/Home';
+import {About} from './Components/About';
 
 
 function App() {
-
-  const [currentPage, setCurrentPage] = useState('');
-
-  function setPage(pageName) {
-    setCurrentPage(pageName);
-  }
+  // let history = useHistory();
 
   return (
-    <div className='bg'>
-      {/* <Nav setCurrentPage={setPage}/> */}
-      
-      <div className='nav'>
-          <h1> Budget Tracker App </h1>
-          <button class="navLi">Home</button>
-          <button class="navLi">About</button>
-          <button class="navLi">Projects</button>
-      </div>
-    </div>
+    <Router>
+      <div className='bg'>
+          <div className='nav'>
+              <h1> Budget Tracker App </h1>
+              {/* Create a button of class "navLi" that switches to the '/about' route */}
+              <button class="navLi">Home</button>
+              <button class="navLi">About</button>
+              <button class="navLi">Projects</button>
+          </div>
+          <div className='content'>
+            <Switch>
+              <Route path="/home">
+                <Home />
+              </Route>
+              <Route path="/about">
+                <About />
+              </Route>
+            </Switch>
+          </div>
+        </div>
+    </Router>
   );
 }
 
