@@ -13,7 +13,7 @@
 
 .nav {
     background-color: #05A8AA;
-    position: absolute;
+    position: relative;
     height: 8%;
     width: 100%;
     display: flex;
