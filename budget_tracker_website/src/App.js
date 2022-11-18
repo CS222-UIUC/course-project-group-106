@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 
 import {Home} from './Components/Home';
 import {About} from './Components/About';
+import {Project} from './Components/Project';
 
 
 function App() {
@@ -35,6 +36,9 @@ function App() {
               </Route>
               <Route path="/about">
                 <About />
+              </Route>
+              <Route path="/project">
+                <Project />
               </Route>
             </Switch>
           </div>

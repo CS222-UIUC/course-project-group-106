@@ -1,13 +1,20 @@
+import './Home.css'
+import SpendingPieChart from '../assets/Spending Pie Chart.png';
+import SpendingOverTime from '../assets/Spending Over Time.png';
+
 function Home() {
     return (
-        <div>
-            <h1>Home</h1>
-            <p>This app will help track your budget -- how much you spend and on what. To use our app, head to the projects tab!</p>
-            <img src="budget_tracker_website\Spending Pie Chart.png" alt="Spending Pie Chart"></img>
-            <caption>% Spending/Category Example Pie Chart</caption>
-            <p><br></br></p>
-            <img src="budget_tracker_website\Spending Over Time.png" alt="Spending Over Time Graph"></img>
-            <caption>Spending/Time Example Graph</caption>
+        <div className='home_content'>
+            <h1 className='home_h1'>Home</h1>
+            <p className='home_p'>This app will help track your budget -- how much you spend and on what. To use our app, head to the projects tab!</p>
+            <div className='home_image-with-text'>
+                <img className = 'home_image-with-text_centered' src={SpendingPieChart} alt="Spending Pie Chart"></img>
+                <p className='home_image-with-text_centered'>Spending/Category Example Pie Chart</p>
+            </div>
+            <div className='home_image-with-text'>
+                <img className = 'home_image-with-text_centered' src={SpendingOverTime} alt="Spending Over Time"></img>
+                <p className='home_image-with-text_centered'>Spending/Time Example Graph</p>
+            </div>
         </div>
     );
 }
