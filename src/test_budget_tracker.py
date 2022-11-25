@@ -3,8 +3,8 @@
 # pylint: disable=unused-variable
 # pylint: disable=duplicate-code
 
-import pandas as pd
 from pathlib import Path
+import pandas as pd
 from budget_tracker import tally_categories
 from budget_tracker import calc_account_balance
 

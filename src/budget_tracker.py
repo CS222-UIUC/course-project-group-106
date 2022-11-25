@@ -57,7 +57,7 @@ def plot_histogram():
     fig = plt.figure(figsize = (20, 10))
     plt.bar(x, y, color ='maroon', width = 1.0)
     plt.xticks(rotation=30, ha='right')
-    
+
     plt.xlabel("Categories")
     plt.ylabel("Amount spent")
     plt.title("Amount spent on each category")
@@ -68,9 +68,9 @@ def calc_food_spending():
     food_spending = 0
     keys = tally.keys()
     for key in keys:
-        if key == 'Restaurants' or key == 'Groceries' or key == 'Food & Dining':
+        if key in ('Restaurants', 'Groceries', 'Food & Dining'):
             food_spending += tally.get(key)
-        if key == 'Food Delivery' or key == 'Fast Food' or key == 'Coffee Shops':
+        if key in ('Food Delivery', 'Fast Food', 'Coffee Shops'):
             food_spending += tally.get(key)
     return food_spending
 
@@ -89,9 +89,9 @@ def calc_transportationtravel_spending():
     transportation_spending = 0
     keys = tally.keys()
     for key in keys:
-        if key == 'Ride Share' or key == 'Travel' or key == 'Gas & Fuel':
+        if key in ('Ride Share', 'Travel', 'Gas & Fuel'):
             transportation_spending += tally.get(key)
-        if key == 'Parking' or key == 'Air Travel' or key == 'Rental Car & Taxi':
+        if key in ('Parking', 'Air Travel', 'Rental Car & Taxi'):
             transportation_spending += tally.get(key)
         if key == 'Hotel':
             transportation_spending += tally.get(key)
@@ -103,7 +103,7 @@ def calc_medical_spending():
 
     keys = tally.keys()
     for key in keys:
-        if key == 'Dentist' or key == 'Doctor' or key == 'Pharmacy':
+        if key in ('Dentist', 'Doctor', 'Pharmacy'):
             med_spending += tally.get(key)
     return med_spending
 
@@ -113,7 +113,7 @@ def calc_utilities_spending():
     utilities = 0
     keys = tally.keys()
     for key in keys:
-        if key == 'Mobile Phone' or key == 'Utilities' or key == 'Gym':
+        if key in ('Mobile Phone', 'Utilities', 'Gym'):
             utilities += tally.get(key)
     return utilities
 
@@ -122,7 +122,9 @@ def calc_entertainment_spending():
     entertainment = 0
     keys = tally.keys()
     for key in keys:
-        if key == 'Movies & DVDs' or key == 'Music' or key == 'Entertainment' or key == 'Sporting Goods':
+        if key in ('Movies & DVDs', 'Music', 'Entertainment'):
+            entertainment += tally.get(key)
+        if key == 'Sporting Goods':
             entertainment += tally.get(key)
     return entertainment
 
@@ -131,7 +133,7 @@ def calc_school_spending():
     school_spending = 0
     keys = tally.keys()
     for key in keys:
-        if key == 'Books & Supplies' or key == 'Tuition':
+        if key in ('Books & Supplies', 'Tuition'):
             school_spending += tally.get(key)
     return school_spending
 
@@ -140,7 +142,9 @@ def calc_shopping_spending():
     shopping = 0
     keys = tally.keys()
     for key in keys:
-        if key == 'Shopping' or key == 'Electronics & Software' or key == 'Gift' or key == 'Clothing':
+        if key in ('Shopping', 'Electronics & Software', 'Gift'):
+            shopping += tally.get(key)
+        if key == 'Clothing':
             shopping += tally.get(key)
     return shopping
 
@@ -149,36 +153,34 @@ def calc_misc_spending():
     miscellaneous = 0
     keys = tally.keys()
     for key in keys:
-        if key == 'Fees & Charges' or key == 'Uncategoried' or key == 'Charity':
+        if key in ('Fees & Charges', 'Uncategoried', 'Charity'):
             miscellaneous += tally.get(key)
-        if key == 'Federal Tax' or key == 'Misc Expenses' or key == 'Bank Fee':
+        if key in ('Federal Tax', 'Misc Expenses', 'Bank Fee'):
             miscellaneous += tally.get(key)
         if key == 'Business Services':
             miscellaneous += tally.get(key)
     return miscellaneous
 
-# entertainment, school, shopping, miscellaneous
-
 # print out the account balance
 print(calc_account_balance())
 
 print(tally_categories())
-category_to_spent = tally_categories()
+category_to_spent_dict = tally_categories()
 
 to_delete = []
-for key, value in category_to_spent.items():
-    if (value >= 0):
-        to_delete.append(key)
+for k, v in category_to_spent_dict.items():
+    if v >= 0:
+        to_delete.append(k)
     else:
-        category_to_spent[key] = category_to_spent[key] * -1
+        category_to_spent_dict[k] = category_to_spent_dict[k] * -1
 
-for key in to_delete:
-    del category_to_spent[key]
+for k in to_delete:
+    del category_to_spent_dict[k]
 
 # define function that plots pie chart of spending, input is a dictionary
 def plot_pie_chart(category_to_spent):
-    sizes = list()
-    labels = list()
+    sizes = []
+    labels = []
     for key, value in category_to_spent.items():
         sizes.append(value)
         labels.append(key)
@@ -191,10 +193,12 @@ def plot_pie_chart(category_to_spent):
 
 #plot_pie_chart(category_to_spent)
 
-# define function that plots line chart of spending over time, input is df (transactions data), group by month.
-def plot_line_chart(df, year):
-    month_to_spending = {'1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0, '8': 0, '9': 0, '10': 0, '11': 0, '12': 0}
-    for index, row in df.iterrows():
+# define function that plots line chart of spending over time,
+# input is df (transactions data), group by month.
+def plot_line_chart(dataframe, year):
+    month_to_spending = {'1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0,
+        '7': 0, '8': 0, '9': 0, '10': 0, '11': 0, '12': 0}
+    for index, row in dataframe.iterrows():
         cur_year = row['Date'].split('/')[2]
         cur_month = row['Date'].split('/')[0]
         print(cur_year, year)
@@ -205,13 +209,13 @@ def plot_line_chart(df, year):
             else:
                 month_to_spending[cur_month] = month_to_spending[cur_month] - row['Amount']
 
-    xaxis = list()
-    yaxis = list()
+    xaxis = []
+    yaxis = []
     print(month_to_spending)
     for key, value in month_to_spending.items():
         xaxis.append(key)
         yaxis.append(value)
-        
+
     # draw line chart with xaxis and yaxis
     plt.plot(xaxis, yaxis)
     plt.xlabel('Month')
@@ -226,20 +230,19 @@ def tally_user_input(tally_dictionary):
     dictionary = {}
     for key, value in tally_dictionary.items():
         dictionary[key] = 0
-        
 
     # print(dictionary.keys())
     while True:
-        user_input_category = input("Enter 'quit' to stop choosing categories to submit values for or enter category name to set budget: \n")
-        if (user_input_category == "quit"):
-            break   
-        else:
-            if (user_input_category) not in dictionary:
-                print("Category was not valid")
-                continue
-            
-            user_input_num = int(input("Enter amount to budget: \n"))
-            dictionary[user_input_category] = user_input_num
+        user_input_category = input("Enter 'quit' to stop choosing categories to submit "
+                                    "values for or enter category name to set budget: \n")
+        if user_input_category == "quit":
+            break
+        if (user_input_category) not in dictionary:
+            print("Category was not valid")
+            continue
+
+        user_input_num = int(input("Enter amount to budget: \n"))
+        dictionary[user_input_category] = user_input_num
 
     return dictionary
 
@@ -247,30 +250,29 @@ def tally_user_input(tally_dictionary):
 
 def budget_left(user_spending, user_budget):
 
-    
     keys = list(user_spending.keys())
 
     spending_value = list(user_spending.values())
     for i in np.arange(len(spending_value)):
         spending_value[i] *= -1
-    
+
     budget_value = list(user_budget.values())
     actual_budget_value = []
-    actual_spending_value = []  
-    actual_keys = []   
+    actual_spending_value = []
+    actual_keys = []
     for key in keys:
         if user_budget[key] > 0:
             actual_budget_value.append(user_budget[key])
             actual_spending_value.append(user_spending[key])
             actual_keys.append(key)
 
-            
+
     X_axis = np.arange(len(actual_keys))
 
-  
+
     plt.bar(X_axis - 0.2, actual_spending_value, 0.4, label = 'Spending')
     plt.bar(X_axis + 0.2, actual_budget_value, 0.4, label = 'Budget')
-    
+
     plt.xticks(X_axis, actual_keys)
     plt.xlabel("Category")
     plt.ylabel("Amount in Dollars")
