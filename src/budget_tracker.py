@@ -187,7 +187,7 @@ def plot_pie_chart(category_to_spent):
     ax1.axis('equal')
     plt.legend(title="Spend Categories")
     plt.savefig("Spending Pie Chart.png")
-    plt.show()
+    # plt.show()
 
 plot_pie_chart(category_to_spent)
 
@@ -218,7 +218,7 @@ def plot_line_chart(df, year):
     plt.ylabel('Spending')
     plt.title('Spending Over Time')
     plt.savefig("Spending Over Time.png")
-    plt.show()
+    # plt.show()
 
 # plot_line_chart(df, '2022')
 
@@ -259,11 +259,11 @@ def budget_left(user_spending, user_budget):
     plt.ylabel("Dollar")
     plt.title("Budget vs Spend")
     plt.legend()
-    plt.show()
+    # plt.show()
 
 
 
-budget_left(tally_categories(), tally_user_input(tally_categories()))
+# budget_left(tally_categories(), tally_user_input(tally_categories()))
 
 # About the project
 # This project is a simple budgeting app that allows you to track your spending and set a budget for each category. 
