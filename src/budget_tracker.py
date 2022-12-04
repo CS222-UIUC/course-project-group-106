@@ -249,26 +249,30 @@ def budget_left(user_spending, user_budget):
 
     X_axis = np.arange(len(list(user_spending.keys())))
     spending_value = list(user_spending.values())
-    # actual_spending = spending_value*-1
     budget_value = list(user_budget.values())
-    # budget = []
-    # for i in budget_value:
-    #     if i > 0:
-    #         budget.append(i)
-    
-    
-
   
     plt.bar(X_axis - 0.2, spending_value, 0.4, label = 'Spending')
     plt.bar(X_axis + 0.2, budget_value, 0.4, label = 'Budget')
     
     plt.xticks(X_axis, list(user_spending.keys()))
     plt.xlabel("Category")
-    plt.ylabel("Number of Students")
-    plt.title("Number of Students in each group")
+    plt.ylabel("Dollar")
+    plt.title("Budget vs Spend")
     plt.legend()
     plt.show()
 
 
 
 budget_left(tally_categories(), tally_user_input(tally_categories()))
+
+# About the project
+# This project is a simple budgeting app that allows you to track your spending and set a budget for each category. 
+# The app will then tell you how much you have left to spend in each category. 
+# The app will also show you a pie chart of your spending and a line chart of your spending over time.
+
+
+# This python script will read in your transaction history from a csv file and then display the following:
+# 1. The total amount of money in your account
+# 2. A pie chart of your spending
+# 3. A line chart of your spending over time
+# 4. A list of categories and how much you have left to spend in that category

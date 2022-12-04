@@ -9,7 +9,7 @@ from budget_tracker import tally_categories
 from budget_tracker import calc_account_balance
 
 def test_can_read_data():
-    df = pd.read_csv('/Users/beckyblake/Desktop/course-project-group-106/data/transactions.csv')
+    df = pd.read_csv('data/transactions.csv')
     assert df is not None
 
 def test_account_has_money():
@@ -17,6 +17,10 @@ def test_account_has_money():
 
 def test_pyexists():
     my_file = Path('./Spending Pie Chart.png')
+    assert my_file.is_file()
+
+def test_amount_spent_exists():
+    my_file = Path('./Spending Over Time.png')
     assert my_file.is_file()
 
 def test_category_to_spent():
