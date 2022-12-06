@@ -57,7 +57,7 @@ def plot_histogram():
     fig = plt.figure(figsize = (20, 10))
     plt.bar(x, y, color ='maroon', width = 1.0)
     plt.xticks(rotation=30, ha='right')
-    
+
     plt.xlabel("Categories")
     plt.ylabel("Amount spent")
     plt.title("Amount spent on each category")
@@ -122,7 +122,7 @@ def calc_entertainment_spending():
     entertainment = 0
     keys = tally.keys()
     for key in keys:
-        if key == 'Movies & DVDs' or key == 'Music' or key == 'Entertainment' or key == 'Sporting Goods':
+        if key in {'Movies & DVDs', 'Music', 'Entertainment', 'Sporting Goods'}:
             entertainment += tally.get(key)
     return entertainment
 
@@ -139,8 +139,9 @@ def calc_shopping_spending():
     tally = tally_categories()
     shopping = 0
     keys = tally.keys()
+    target = ['Shopping', 'Electronics & Software', 'Gift', 'Clothing']
     for key in keys:
-        if key == 'Shopping' or key == 'Electronics & Software' or key == 'Gift' or key == 'Clothing':
+        if key in target:
             shopping += tally.get(key)
     return shopping
 
@@ -157,17 +158,13 @@ def calc_misc_spending():
             miscellaneous += tally.get(key)
     return miscellaneous
 
-# entertainment, school, shopping, miscellaneous
 
-# print out the account balance
-print(calc_account_balance())
-
-print(tally_categories())
+# print(tally_categories())
 category_to_spent = tally_categories()
 
 to_delete = []
 for key, value in category_to_spent.items():
-    if (value >= 0):
+    if value >= 0:
         to_delete.append(key)
     else:
         category_to_spent[key] = category_to_spent[key] * -1
@@ -187,27 +184,24 @@ def plot_pie_chart(category_to_spent):
     ax1.axis('equal')
     plt.legend(title="Spend Categories")
     plt.savefig("Spending Pie Chart.png")
-    # plt.show()
+    plt.show()
 
-plot_pie_chart(category_to_spent)
 
-# define function that plots line chart of spending over time, input is df (transactions data), group by month.
+# define function that plots line chart of spending over time
+#  input is df (transactions data), group by month.
 def plot_line_chart(df, year):
     month_to_spending = {'1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0, '8': 0, '9': 0, '10': 0, '11': 0, '12': 0}
     for index, row in df.iterrows():
         cur_year = row['Date'].split('/')[2]
         cur_month = row['Date'].split('/')[0]
-        print(cur_year, year)
         if cur_year == year:
             if row['Transaction Type'] == 'credit':
                 month_to_spending[cur_month] = month_to_spending[cur_month] + row['Amount']
-                print('went here')
             else:
                 month_to_spending[cur_month] = month_to_spending[cur_month] - row['Amount']
 
-    xaxis = list()
-    yaxis = list()
-    print(month_to_spending)
+    xaxis = []
+    yaxis = []
     for key, value in month_to_spending.items():
         xaxis.append(key)
         yaxis.append(value)
@@ -218,9 +212,8 @@ def plot_line_chart(df, year):
     plt.ylabel('Spending')
     plt.title('Spending Over Time')
     plt.savefig("Spending Over Time.png")
-    # plt.show()
+    plt.show()
 
-# plot_line_chart(df, '2022')
 
 def tally_user_input(tally_dictionary):
     dictionary = {}
@@ -243,27 +236,38 @@ def tally_user_input(tally_dictionary):
 
     return dictionary
 
-# print(tally_user_input(tally_categories()))
-
 def budget_left(user_spending, user_budget):
 
-    X_axis = np.arange(len(list(user_spending.keys())))
+    keys = list(user_spending.keys())
+
     spending_value = list(user_spending.values())
+    for i in np.arange(len(spending_value)):
+        spending_value[i] *= -1
+
     budget_value = list(user_budget.values())
-  
-    plt.bar(X_axis - 0.2, spending_value, 0.4, label = 'Spending')
-    plt.bar(X_axis + 0.2, budget_value, 0.4, label = 'Budget')
-    
-    plt.xticks(X_axis, list(user_spending.keys()))
+    actual_budget_value = []
+    actual_spending_value = []  
+    actual_keys = []   
+    for key in keys:
+        if user_budget[key] > 0:
+            actual_budget_value.append(user_budget[key])
+            actual_spending_value.append(user_spending[key])
+            actual_keys.append(key)
+
+
+    X_axis = np.arange(len(actual_keys))
+
+
+    plt.bar(X_axis - 0.2, actual_spending_value, 0.4, label = 'Spending')
+    plt.bar(X_axis + 0.2, actual_budget_value, 0.4, label = 'Budget')
+
+    plt.xticks(X_axis, actual_keys)
     plt.xlabel("Category")
-    plt.ylabel("Dollar")
-    plt.title("Budget vs Spend")
+    plt.ylabel("Amount in Dollars")
+    plt.title("Budget and Spending Side-By-Side")
     plt.legend()
-    # plt.show()
+    plt.show()
 
-
-
-# budget_left(tally_categories(), tally_user_input(tally_categories()))
 
 # About the project
 # This project is a simple budgeting app that allows you to track your spending and set a budget for each category. 
@@ -276,3 +280,27 @@ def budget_left(user_spending, user_budget):
 # 2. A pie chart of your spending
 # 3. A line chart of your spending over time
 # 4. A list of categories and how much you have left to spend in that category
+
+
+# UNCOMMENT to have a bar graph that displays spending and budget side by side
+# It will prompt for you to choose what categories to input a budget for and how much to budget, type quit to end
+#
+#
+# budget_left(tally_categories(), tally_user_input(tally_categories()))
+
+
+# UNCOMMENT to see pie chart of spending broken down by category
+#
+#
+# plot_pie_chart(category_to_spent)
+
+# UNCOMMENT to see line chart of account balance over time
+# Can input different years
+#
+#
+# plot_line_chart(df, '2022')
+
+# UNCOMMENT to print out the account balance
+#
+#
+# print(calc_account_balance())
