@@ -257,6 +257,8 @@ def budget_left(user_spending, user_budget):
 
     X_axis = np.arange(len(actual_keys))
 
+    for i in range(len(actual_spending_value)):
+        actual_spending_value[i] = actual_spending_value[i] * -1
 
     plt.bar(X_axis - 0.2, actual_spending_value, 0.4, label = 'Spending')
     plt.bar(X_axis + 0.2, actual_budget_value, 0.4, label = 'Budget')
@@ -281,6 +283,15 @@ def budget_left(user_spending, user_budget):
 # 3. A line chart of your spending over time
 # 4. A list of categories and how much you have left to spend in that category
 
+# UNCOMMENT to print out the account balance
+#
+#
+# print(calc_account_balance())
+
+# UNCOMMENT to see pie chart of spending broken down by category
+#
+#
+# plot_pie_chart(category_to_spent)
 
 # UNCOMMENT to have a bar graph that displays spending and budget side by side
 # It will prompt for you to choose what categories to input a budget for and how much to budget, type quit to end
@@ -289,18 +300,9 @@ def budget_left(user_spending, user_budget):
 # budget_left(tally_categories(), tally_user_input(tally_categories()))
 
 
-# UNCOMMENT to see pie chart of spending broken down by category
-#
-#
-# plot_pie_chart(category_to_spent)
-
 # UNCOMMENT to see line chart of account balance over time
 # Can input different years
 #
 #
 # plot_line_chart(df, '2022')
 
-# UNCOMMENT to print out the account balance
-#
-#
-# print(calc_account_balance())
