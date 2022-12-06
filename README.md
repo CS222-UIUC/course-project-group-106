@@ -1,14 +1,17 @@
-![code coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)
+# Customizable Budgeting Tool Project
+Our project is Parsley, a customizable budgeting tool that allows users to easily visualize their financial data. We aim to solve the problem of financial budgeting tool products pushing advertisements to the detriment of users by providing a customizable and modular solution to budget visualization that has no other strings attached.
 
-![lint code base](https://img.shields.io/badge/lint%20code%20base-passing%20locally-green)
+## Technical Architecture
 
-# course-project-group-106
-course-project-group-106 created by GitHub Classroom
+<img width="403" alt="Screen Shot 2022-12-05 at 11 25 59 PM" src="https://user-images.githubusercontent.com/92757497/205823859-8cfc18a7-88a0-4f3c-9951-709284cc36d4.png">
 
-The github actions is only failing because of the billing issues on the class' end
+## Installation Instructions
+1. Install PyCharm or any IDE supporting Python
+2. Copy URL of Github repository
+3. Clone repository on local machine
+4. Replace transactions.csv with your own transaction history
+5. Follow instructions in comments at the bottom of budget_tracker.py
+6. Press run button to run the program
 
-test cases are passing 2/2 on local
 
-![image](https://user-images.githubusercontent.com/60597419/194675393-69fedc91-2313-4fdf-aec9-891bf53a3c95.png)
-<img width="650" alt="Screen Shot 2022-10-21 at 2 59 15 PM" src="https://user-images.githubusercontent.com/92757497/197279094-bbb71392-b774-4119-a914-27f3c5a179a8.png">
-<img width="643" alt="Screen Shot 2022-10-21 at 2 59 26 PM" src="https://user-images.githubusercontent.com/92757497/197279106-4ee7bd9b-fa5f-43fd-8869-0a93b718735e.png">
+*Created by Armani Chien, Palak Kotwani, Cayla Risinger, and Becky Blake*
