@@ -14,4 +14,7 @@ Our project is Parsley, a customizable budgeting tool that allows users to easil
 6. Press run button to run the program
 
 
+Final presentation: https://docs.google.com/presentation/d/1vTHFfDdzPTJCoLKe1uFTokaBtuuQ-XmKSi5ghVL3ekA/edit?usp=sharing
+
+
 *Created by Armani Chien, Palak Kotwani, Cayla Risinger, and Becky Blake*
