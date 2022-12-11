@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "papaparse": "^5.3.2",
+    "react-papaparse": "^4.1.0",
+    "react-router-dom": "^5.3.4"
+  }
+}

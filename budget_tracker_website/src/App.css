@@ -1,0 +1,24 @@
+.nav > h1 {
+    color: white;
+}
+
+.nav {
+    background-color: #05A8AA;
+    position: relative;
+    height: 8%;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.navLi {
+    height: 80%;
+    color: white;
+    margin-left: 10px;
+    background: none;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    font-size: 20px;
+}
